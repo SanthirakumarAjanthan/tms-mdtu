@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * { box-sizing: border-box; }
+  body { @apply font-sans text-slate-800 antialiased; background: #F0F2F5; }
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-slate-300 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400; }
+}
+
+@layer components {
+
+  /* ─── Buttons ────────────────────────────────────────────────── */
+  .btn {
+    @apply inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold
+           transition-all duration-150 cursor-pointer border-none select-none;
+  }
+  .btn-sm  { @apply px-3 py-1.5 text-xs rounded-md; }
+  .btn-xs  { @apply px-2 py-1 text-[11px] rounded; }
+  .btn-primary {
+    @apply bg-blue-600 text-white shadow-sm;
+    &:hover { @apply bg-blue-700 shadow-md -translate-y-px; }
+    &:active { @apply translate-y-0 shadow-sm; }
+    &:disabled { @apply opacity-60 cursor-not-allowed translate-y-0 shadow-none; }
+  }
+  .btn-secondary {
+    @apply bg-white text-slate-600 border border-slate-200 shadow-sm;
+    &:hover { @apply bg-slate-50 border-slate-300; }
+    &:disabled { @apply opacity-60 cursor-not-allowed; }
+  }
+  .btn-success { @apply bg-emerald-600 text-white shadow-sm; &:hover { @apply bg-emerald-700 -translate-y-px; } }
+  .btn-danger  { @apply bg-red-600 text-white shadow-sm;     &:hover { @apply bg-red-700 -translate-y-px; } }
+  .btn-ghost   { @apply bg-transparent text-slate-500 border border-slate-200; &:hover { @apply bg-slate-50; } }
+
+  /* ─── Badges ────────────────────────────────────────────────── */
+  .badge { @apply inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wide; }
+  .badge-green  { @apply bg-emerald-100 text-emerald-700; }
+  .badge-yellow { @apply bg-amber-100 text-amber-700; }
+  .badge-red    { @apply bg-red-100 text-red-700; }
+  .badge-blue   { @apply bg-blue-100 text-blue-700; }
+  .badge-gray   { @apply bg-slate-100 text-slate-600; }
+  .badge-purple { @apply bg-violet-100 text-violet-700; }
+
+  /* ─── Cards ─────────────────────────────────────────────────── */
+  .card { @apply bg-white rounded-xl border border-slate-200 shadow-sm overflow-hidden; }
+  .card-hover { @apply hover:shadow-md hover:-translate-y-0.5 transition-all duration-150; }
+
+  /* ─── Form Controls ──────────────────────────────────────────── */
+  .form-input, .form-select {
+    @apply w-full px-3 py-2 rounded-lg border border-slate-200 bg-white text-sm text-slate-800
+           outline-none transition-all duration-150 shadow-sm;
+    &:focus { @apply border-blue-400 ring-2 ring-blue-100; }
+    &:disabled { @apply bg-slate-50 text-slate-400 cursor-not-allowed; }
+  }
+  .form-label {
+    @apply block text-xs font-semibold text-slate-600 mb-1.5;
+  }
+
+  /* ─── Table ──────────────────────────────────────────────────── */
+  .tbl { @apply w-full border-collapse text-sm; }
+  .tbl thead th {
+    @apply px-4 py-3 text-left text-[11px] font-bold uppercase tracking-wider
+           text-slate-500 bg-slate-50 border-b border-slate-200 whitespace-nowrap;
+  }
+  .tbl tbody td { @apply px-4 py-3 border-b border-slate-100 align-middle; }
+  .tbl tbody tr:last-child td { @apply border-b-0; }
+  .tbl tbody tr { @apply transition-colors duration-100; }
+  .tbl tbody tr:hover td { @apply bg-blue-50/40; }
+
+  /* ─── Icon Button ────────────────────────────────────────────── */
+  .icon-btn {
+    @apply w-7 h-7 inline-flex items-center justify-center rounded-lg border border-slate-200
+           bg-white text-slate-400 cursor-pointer transition-all duration-150 shadow-sm;
+    &:hover { @apply bg-slate-50 text-slate-600 border-slate-300; }
+  }
+  .icon-btn.edit:hover    { @apply bg-blue-50 text-blue-600 border-blue-200; }
+  .icon-btn.danger:hover  { @apply bg-red-50 text-red-600 border-red-200; }
+  .icon-btn.success:hover { @apply bg-emerald-50 text-emerald-600 border-emerald-200; }
+}
+
+/* ─── Animations ─────────────────────────────────────────────── */
+@keyframes fadeUp   { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes fadeIn   { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUp  { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: none; } }
+@keyframes pulse-soft { 0%, 100% { opacity: 1; } 50% { opacity: 0.7; } }
+
+.animate-fade-up  { animation: fadeUp .3s cubic-bezier(.22,1,.36,1) both; }
+.animate-fade-in  { animation: fadeIn .2s ease-out both; }
+.animate-slide-up { animation: slideUp .28s cubic-bezier(.22,1,.36,1) both; }
+
+/* ─── Form validation error state ────────────────────────────── */
+.form-input.is-invalid,
+.form-select.is-invalid {
+  border-color: #f87171;
+  background-color: #fff8f8;
+}
+.form-input.is-invalid:focus,
+.form-select.is-invalid:focus {
+  border-color: #ef4444;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.12);
+  outline: none;
+}
+
+/* ─── Design Tokens (CSS utilities used across components) ───── */
+/* Border */
+.border-border  { border-color: #e2e8f0; }   /* slate-200 */
+.border-primary { border-color: #2563eb; }   /* blue-600  */
+.border-success { border-color: #059669; }   /* emerald-600 */
+
+/* Backgrounds */
+.bg-surface-2   { background-color: #f8fafc; } /* slate-50  */
+.bg-surface-3   { background-color: #f1f5f9; } /* slate-100 */
+.bg-primary-dim { background-color: #eff6ff; } /* blue-50   */
+
+/* Text */
+.text-muted        { color: #94a3b8; }  /* slate-400   */
+.text-primary      { color: #2563eb; }  /* blue-600    */
+.text-primary-dark { color: #1d4ed8; }  /* blue-700    */
+.text-success      { color: #059669; }  /* emerald-600 */
+
+/* Compound utilities used in components */
+.bg-success     { background-color: #059669; }  /* emerald-600 */
+
+/* ─── Custom shadow tokens ────────────────────────────────────── */
+.shadow-card       { box-shadow: 0 1px 4px 0 rgba(0,0,0,.06), 0 1px 2px -1px rgba(0,0,0,.04); }
+.shadow-card-hover { box-shadow: 0 4px 16px 0 rgba(0,0,0,.09), 0 2px 4px -1px rgba(0,0,0,.06); }
+
+/* ─── Icon btn disabled ───────────────────────────────────────── */
+.icon-btn:disabled {
+  @apply opacity-40 cursor-not-allowed pointer-events-none;
+}
+
+/* ─── Responsive — Mobile overrides ──────────────────────────── */
+@media (max-width: 640px) {
+  /* DataTable toolbar wraps cleanly */
+  .overflow-hidden > div:first-child {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Page header stacks on small screens */
+  .flex.items-center.justify-between.flex-wrap {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  /* Form grids use sm:grid-cols-* — handled by Tailwind responsive classes */
+
+  /* Table horizontal scroll */
+  .overflow-x-auto {
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Buttons minimum height on mobile */
+  .btn { min-height: 42px; }
+
+  /* Modal body: more breathing room on small phones */
+  .modal-body { padding: 1rem; }
+}
